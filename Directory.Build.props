@@ -8,7 +8,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
-    <NoWarn>$(NoWarn);CS8509;IDE0039;IDE0130;IDE0290;IDE0060;RZ10012;IDE0052;BL0007;NU5128</NoWarn>
+    <NoWarn>$(NoWarn);CS8509;IDE0039;IDE0130;IDE0290;IDE0060;RZ10012;IDE0052;BL0007;NU5128;IDE0079;CS8424</NoWarn>
     <WarningsAsErrors>$(WarningsAsErrors);RZ2012</WarningsAsErrors>
   </PropertyGroup>
 
