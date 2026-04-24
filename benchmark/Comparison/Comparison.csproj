@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <!-- Mediator packages -->
+  <ItemGroup>
+    <PackageReference Include="DispatchR.Mediator" />
+    <PackageReference Include="LiteBus.Queries.Extensions.Microsoft.DependencyInjection" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Mediator.Abstractions" />
+    <PackageReference Include="Mediator.SourceGenerator" />
+  </ItemGroup>
+
+  <!-- Use Pipelines from local git repo -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Pipelines\Pipelines.csproj" />
+    <ProjectReference Include="..\..\src\Pipelines.Generator\Pipelines.Generator.csproj" OutputItemType="Analyzer" />
+  </ItemGroup>
+
+  <!-- Uncomment below to use Pipelines from NuGet -->
+  <!-- <ItemGroup>
+    <PackageReference Include="Pipelines" Version="1.*" />
+  </ItemGroup> -->
+</Project>
