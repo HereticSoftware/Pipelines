@@ -1,0 +1,22 @@
+﻿@page "/counter"
+@rendermode InteractiveAuto
+@* @rendermode InteractiveServer *@
+@* @rendermode InteractiveWebAssembly *@
+@inject Pipeline pipeline
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter (@RendererInfo.Name)</h1>
+
+<p role="status">Current { Count = @(current.Count), From = @(current.From) }</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private IncrementCounterResponse current = new(0, "CTOR");
+
+    private async Task IncrementCount()
+    {
+        current = await pipeline.Request.Execute(new IncrementCounterRequest(current.Count));
+    }
+}

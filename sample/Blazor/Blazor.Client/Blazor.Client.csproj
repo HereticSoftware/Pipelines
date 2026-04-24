@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+  </ItemGroup>
+  <!-- Use Pipelines from local git repo -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Pipelines\Pipelines.csproj" />
+    <ProjectReference Include="..\..\..\src\Pipelines.Generator\Pipelines.Generator.csproj" OutputItemType="Analyzer" />
+  </ItemGroup>
+
+  <!-- Uncomment below to use Pipelines from NuGet -->
+  <!-- <ItemGroup>
+    <PackageReference Include="Pipelines" Version="1.*" />
+  </ItemGroup> -->
+
+</Project>

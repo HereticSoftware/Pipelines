@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="../../src/Pipelines/Pipelines.csproj" />
+    <Project Path="../../src/Pipelines.Generator/Pipelines.Generator.csproj" />
+  </Folder>
+  <Project Path="Blazor/Blazor.csproj" />
+  <Project Path="Blazor.Client/Blazor.Client.csproj" />
+</Solution>

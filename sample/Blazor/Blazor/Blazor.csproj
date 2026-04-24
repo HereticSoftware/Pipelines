@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blazor.Client\Blazor.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
+  </ItemGroup>
+
+  <!-- Use Pipelines from local git repo -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Pipelines\Pipelines.csproj" />
+    <ProjectReference Include="..\..\..\src\Pipelines.Generator\Pipelines.Generator.csproj" OutputItemType="Analyzer" />
+  </ItemGroup>
+
+  <!-- Uncomment below to use Pipelines from NuGet -->
+  <!-- <ItemGroup>
+    <PackageReference Include="Pipelines" Version="1.*" />
+  </ItemGroup> -->
+
+</Project>

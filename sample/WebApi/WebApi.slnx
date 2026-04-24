@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="../../src/Pipelines/Pipelines.csproj" />
+    <Project Path="../../src/Pipelines.Generator/Pipelines.Generator.csproj" />
+  </Folder>
+  <Project Path="WebApi.csproj" />
+</Solution>
