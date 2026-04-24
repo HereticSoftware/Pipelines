@@ -1,0 +1,6 @@
+<Project>  
+  <ItemGroup>
+    <CompilerVisibleProperty Include="Pipelines_DisableHandlerRegistration" />
+    <CompilerVisibleProperty Include="Pipelines_DisableMediatorRegistration" />
+  </ItemGroup>
+</Project>
