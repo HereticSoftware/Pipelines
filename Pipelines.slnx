@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Pipelines/Pipelines.csproj" />
+    <Project Path="src/Pipelines.Generator/Pipelines.Generator.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Pipelines.Generator.Test/Pipelines.Generator.Test.csproj" />
+    <Project Path="test/Pipelines.Generator.Test.Integration/Pipelines.Generator.Test.Integration.csproj" />
+  </Folder>
+</Solution>
