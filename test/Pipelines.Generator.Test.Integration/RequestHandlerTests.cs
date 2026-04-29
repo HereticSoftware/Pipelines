@@ -37,10 +37,10 @@ public sealed class RequestHandlerTests : TestBase
         var pipline = services.GetService<Pipeline>();
         await That(pipline).IsNotNull();
 
-        var pong = await pipline!.Request.Execute(new Ping());
+        var pong = await pipline!.Request(new Ping());
         await That(pong).IsNotNull();
 
-        var ping = await pipline!.Request.Execute(new Pong(10));
+        var ping = await pipline!.Request(new Pong(10));
         await That(ping).IsNotNull();
     }
 
@@ -58,7 +58,7 @@ public sealed class RequestHandlerTests : TestBase
         var pipline = services.GetService<Pipeline>();
         await That(pipline).IsNotNull();
 
-        var pong = await pipline!.Request.Execute(new Ping());
+        var pong = await pipline!.Request(new Ping());
         await That(pong).IsNotNull();
 
         var stack = context.CallStack.ToArray();

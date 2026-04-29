@@ -38,10 +38,10 @@ public sealed class StreamRequestHandlerTests : TestBase
         var pipline = services.GetService<Pipeline>();
         await That(pipline).IsNotNull();
 
-        var pongs = await pipline!.Stream.Execute(new Ping()).ToArrayAsync();
+        var pongs = await pipline!.Stream(new Ping()).ToArrayAsync();
         await That(pongs).Count().IsEqualTo(2);
 
-        var pings = await pipline!.Stream.Execute(new Pong(10)).ToArrayAsync();
+        var pings = await pipline!.Stream(new Pong(10)).ToArrayAsync();
         await That(pings).Count().IsEqualTo(2);
     }
 
@@ -59,7 +59,7 @@ public sealed class StreamRequestHandlerTests : TestBase
         var pipline = services.GetService<Pipeline>();
         await That(pipline).IsNotNull();
 
-        var pongs = await pipline!.Stream.Execute(new Ping()).ToArrayAsync();
+        var pongs = await pipline!.Stream(new Ping()).ToArrayAsync();
         await That(pongs).Count().IsEqualTo(2);
 
         var stack = context.CallStack.ToArray();
