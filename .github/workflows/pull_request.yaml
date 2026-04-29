@@ -1,0 +1,18 @@
+name: Pull Request
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - test/**
+      - Directory.Packages.props
+    types:
+      - opened
+      - ready_for_review
+      - review_requested
+jobs:
+  pipeline:
+    uses: HereticSoftware/.github/.github/workflows/cake-file.yaml@356e22aae2a29c038faea584a9ccd717ba3fbbf1
+    with:
+      target: PullRequest

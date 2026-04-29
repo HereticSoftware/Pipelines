@@ -1,0 +1,19 @@
+name: Publish
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+ # Only matches vX.X.X where X is a number
+    paths:
+      - src/**
+      - Directory.build.packages
+jobs:
+  pipeline:
+    uses: HereticSoftware/.github/.github/workflows/cake-file.yaml@356e22aae2a29c038faea584a9ccd717ba3fbbf1
+    with:
+      target: publish
+      nuget: true
+    secrets:
+      nuget-user: ${{ secrets.NUGET_USER }}
