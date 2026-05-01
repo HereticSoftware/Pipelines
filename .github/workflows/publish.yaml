@@ -9,6 +9,9 @@ on:
     paths:
       - src/**
       - Directory.build.packages
+permissions:
+  id-token: write
+  contents: read
 jobs:
   publish:
     runs-on: ubuntu-latest
