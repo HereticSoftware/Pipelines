@@ -28,10 +28,10 @@ jobs:
           user: ${{ secrets.NUGET_USER }}
 
       - name: Setup .NET
-        uses: HereticSoftware/.github/actions/setup-dotnet@3b5813ba304a89237e5c401bff9d50f3b58f8720
+        uses: HereticSoftware/.github/actions/setup-dotnet@b0e9f8a17bc89c540b6c102adce8440ebac767cc
 
       - name: Cake File
-        uses: HereticSoftware/.github/actions/cake-file@3b5813ba304a89237e5c401bff9d50f3b58f8720
+        uses: HereticSoftware/.github/actions/cake-file@b0e9f8a17bc89c540b6c102adce8440ebac767cc
         env:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
           NUGET_SOURCE: https://api.nuget.org/v3/index.json
