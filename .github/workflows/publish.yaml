@@ -17,3 +17,6 @@ jobs:
       nuget: true
     secrets:
       nuget-user: ${{ secrets.NUGET_USER }}
+    permissions:
+      id-token: write
+      contents: read
