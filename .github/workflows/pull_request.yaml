@@ -13,6 +13,17 @@ on:
       - review_requested
 jobs:
   pull_request:
-    uses: HereticSoftware/.github/.github/workflows/cake-file.yaml@05ac2b1f70f528e70c7083deb26b91818ed06598
-    with:
-      target: pull-request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: Actions/Checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: HereticSoftware/.github/actions/setup-dotnet@3b5813ba304a89237e5c401bff9d50f3b58f8720
+
+      - name: Cake File
+        uses: HereticSoftware/.github/actions/cake-file@3b5813ba304a89237e5c401bff9d50f3b58f8720
+        with:
+          target: pull-request
