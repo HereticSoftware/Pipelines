@@ -5,13 +5,13 @@ on:
     branches:
       - main
     tags:
-      - v[0-9]+.[0-9]+.[0-9]+ # Only matches vX.X.X where X is a number
+      - v[0-9]+.[0-9]+
     paths:
       - src/**
       - Directory.build.packages
 jobs:
-  pipeline:
-    uses: HereticSoftware/.github/.github/workflows/cake-file.yaml@356e22aae2a29c038faea584a9ccd717ba3fbbf1
+  publish:
+    uses: HereticSoftware/.github/.github/workflows/cake-file.yaml@05ac2b1f70f528e70c7083deb26b91818ed06598
     with:
       target: publish
       nuget: true
