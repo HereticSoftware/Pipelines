@@ -3,8 +3,7 @@
   "version": "1.0-alpha.{height}",
   "pathFilters": [
     "/src",
-    "/Directory.Packages.props",
-    "!version.json"
+    "/Directory.Packages.props"
   ],
   "publicReleaseRefSpec": [
     "^refs/heads/main",
