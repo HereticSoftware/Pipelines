@@ -55,7 +55,7 @@ internal static class SourceBuilderExtensions
         }
 
         /// <summary>
-        /// Writes a <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute"/> line with the generator name and version.
+        /// Writes a using statement for the <see cref="global::System.CodeDom.Compiler"/> namespace.
         /// </summary>
         public void UsingSystemCodeDomCompiler()
         {
