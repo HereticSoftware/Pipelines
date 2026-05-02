@@ -2,7 +2,7 @@ namespace Some.Nested.Types
 {
     public static class Program
     {
-        public static void Task Main()
+        public static void Main()
         {
         }
 
@@ -15,6 +15,14 @@ namespace Some.Nested.Types
             public ValueTask<Pong> Handle(Ping request, CancellationToken cancellationToken)
             {
                 return new ValueTask<Pong>(new Pong(request.Id));
+            }
+        }
+
+        public class PingStreamHandler : IStreamRequestHandler<Ping, Pong>
+        {
+            public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
+            {
+                yield break;
             }
         }
     }

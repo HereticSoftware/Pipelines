@@ -14,4 +14,12 @@ public class InsideClass
             return new(Pong);
         }
     }
+
+    public sealed class StreamPingHandler : IStreamRequestHandler<Ping, Pong>
+    {
+        public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
+        {
+            yield break;
+        }
+    }
 }

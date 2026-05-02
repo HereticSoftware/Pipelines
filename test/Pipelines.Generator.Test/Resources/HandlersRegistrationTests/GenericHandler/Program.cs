@@ -4,14 +4,23 @@ namespace Pipelines.Test.Integration;
 public sealed class Result<TResult>;
 
 public abstract record Command<TSelf, TResult> : IRequest<TSelf, Result<TResult>>
+    where TSelf : Command<TSelf, TResult>
     where TResult : notnull;
 
-public class CommandHandler<TCommand, TResult> :
+public abstract class CommandHandler<TCommand, TResult> :
     IRequestHandler<TCommand, Result<TResult>>
     where TCommand : Command<TCommand, TResult>
     where TResult : notnull
 {
     public abstract ValueTask<Result<TResult>> Handle(TCommand command, CancellationToken cancellationToken);
+}
+
+public abstract class StreamCommandHandler<TCommand, TResult> :
+    IStreamRequestHandler<TCommand, Result<TResult>>
+    where TCommand : Command<TCommand, TResult>
+    where TResult : notnull
+{
+    public abstract IAsyncEnumerable<Result<TResult>> Handle(TCommand command, CancellationToken cancellationToken);
 }
 
 public sealed record Pong;
@@ -24,5 +33,13 @@ public sealed class PingCommandHandler : CommandHandler<Ping, Pong>
     {
         var r = new Result<Pong>();
         return new(r);
+    }
+}
+
+public sealed class PingStreamCommandHandler : StreamCommandHandler<Ping, Pong>
+{
+    public override async IAsyncEnumerable<Result<Pong>> Handle(Ping Ping, CancellationToken cancellationToken)
+    {
+        yield break;
     }
 }

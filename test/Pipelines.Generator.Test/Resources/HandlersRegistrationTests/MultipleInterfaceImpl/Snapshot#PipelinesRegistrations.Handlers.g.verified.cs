@@ -16,6 +16,9 @@ internal static partial class PipelinesRegistrations
     {
         services.AddScoped<global::Pipelines.Requests.IRequestHandler<global::SomeProgram.Ping1, global::SomeProgram.Pong>, global::SomeProgram.Ping1Handler>();
         services.AddScoped<global::Pipelines.Requests.IRequestHandler<global::SomeProgram.Ping2, global::SomeProgram.Pong>, global::SomeProgram.Ping1Handler>();
+        services.AddScoped<global::Pipelines.Streams.IStreamRequestHandler<global::SomeProgram.Ping1, global::SomeProgram.Pong>, global::SomeProgram.StreamPing1Handler>();
+        services.AddScoped<global::Pipelines.Streams.IStreamRequestHandler<global::SomeProgram.Ping2, global::SomeProgram.Pong>, global::SomeProgram.StreamPing1Handler>();
+
         return services;
     }
 }

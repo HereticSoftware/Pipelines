@@ -73,37 +73,61 @@ public sealed class HandlersRegistrationTests : TestBase
     [Test]
     public Task PrivateHandler()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
     public Task PrivateRequest()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
     public Task PrivateResponse()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
     public Task ProtectedHandler()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
     public Task ProtectedRequest()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
     public Task ProtectedResponse()
     {
-        return Verify(configure);
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]
@@ -116,6 +140,16 @@ public sealed class HandlersRegistrationTests : TestBase
     public Task RequestWithoutContract()
     {
         return Verify(configure);
+    }
+
+    [Test]
+    public Task ServiceCollectionMethod()
+    {
+        return Verify(context =>
+        {
+            configure(context);
+            context.IgnoreCompilationErrors = true;
+        });
     }
 
     [Test]

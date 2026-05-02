@@ -2,7 +2,7 @@
 
 public class InsideClass
 {
-    public sealed class Ping : IRequest<Ping, Pong>;
+    public sealed class Ping : IRequest<Ping, Pong>, IStreamRequest<Ping, Pong>;
 
     public sealed class Pong;
 
@@ -12,6 +12,14 @@ public class InsideClass
         {
             var Pong = new Pong();
             return new(Pong);
+        }
+    }
+
+    public class PingStreamHandler : IStreamRequestHandler<Ping, Pong>
+    {
+        public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
+        {
+            yield break;
         }
     }
 }

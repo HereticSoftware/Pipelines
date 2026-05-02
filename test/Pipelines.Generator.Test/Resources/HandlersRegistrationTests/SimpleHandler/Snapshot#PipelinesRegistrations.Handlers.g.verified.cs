@@ -15,6 +15,8 @@ internal static partial class PipelinesRegistrations
     public static global::Microsoft.Extensions.DependencyInjection.IServiceCollection AddHandlers(this global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)
     {
         services.AddScoped<global::Pipelines.Requests.IRequestHandler<global::Some.Nested.Types.Ping, global::Some.Nested.Types.Pong>, global::Some.Nested.Types.PingHandler>();
+        services.AddScoped<global::Pipelines.Streams.IStreamRequestHandler<global::Some.Nested.Types.Ping, global::Some.Nested.Types.Pong>, global::Some.Nested.Types.PingStreamHandler>();
+
         return services;
     }
 }
