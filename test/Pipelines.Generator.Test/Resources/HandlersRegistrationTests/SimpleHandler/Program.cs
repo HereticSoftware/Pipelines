@@ -11,4 +11,12 @@ namespace Some.Nested.Types
             return new ValueTask<Pong>(new Pong(request.Id));
         }
     }
+
+    public class PingStreamHandler : IStreamRequestHandler<Ping, Pong>
+    {
+        public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
+        {
+            yield break;
+        }
+    }
 }

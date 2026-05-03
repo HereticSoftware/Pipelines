@@ -14,12 +14,14 @@ internal static class HandlesrRegistrationGenerator
             .SyntaxProvider
             .CreateSyntaxProvider(Predicate, (context, ct) => Transform(context.Node, context.SemanticModel, ct))
             .SelectMany((x, ct) => x)
-            .Collect()
-            .Combine(features);
+            .Collect();
 
-        context.RegisterSourceOutput(handlers, static (spc, ctx) =>
+        var toGenerate = features
+            .Combine(handlers);
+
+        context.RegisterSourceOutput(toGenerate, static (spc, ctx) =>
         {
-            var (handlers, features) = ctx;
+            var (features, handlers) = ctx;
 
             if (features is not { HasDependencyInjection: true, DisableHandlerRegistration: false })
                 return;
@@ -50,10 +52,9 @@ internal static class HandlesrRegistrationGenerator
             if (IRequestHandler(interfaceSymbol) ||
                 IStreamRequestHandler(interfaceSymbol))
             {
-                yield return new HandlerRegistration(node, symbol, interfaceSymbol);
+                yield return new HandlerRegistration(symbol, interfaceSymbol);
             }
         }
-        //return null;
 
         static bool ValidHandler([NotNullWhen(true)] INamedTypeSymbol? handler) => handler is
         {
@@ -66,7 +67,7 @@ internal static class HandlesrRegistrationGenerator
 
         static bool ValidTypeArgument(ITypeSymbol typeSymbol) => typeSymbol switch
         {
-            // todo: expand failure criteria
+            // todo: expand failure criteria and add diagnostics
             INamedTypeSymbol named => named is
             {
                 IsAbstract: false,
@@ -101,7 +102,9 @@ internal static class HandlesrRegistrationGenerator
         }
     }
 
-    private static void GenerateSourceOutput(SourceProductionContext spc, ImmutableArray<HandlerRegistration> handlersToGenerate)
+    private static void GenerateSourceOutput(
+        in SourceProductionContext spc,
+        in ImmutableArray<HandlerRegistration> handlers)
     {
         // todo: diagnostics for duplicate handlers
         //var descriptor = new DiagnosticDescriptor(
@@ -130,9 +133,13 @@ internal static class HandlesrRegistrationGenerator
         {
             using (sb.Block(sb, $"public static {sb.IServiceCollection} AddHandlers(this {sb.IServiceCollection} services)"))
             {
-                foreach (var handlerToGenerate in handlersToGenerate)
+                if (!handlers.IsDefaultOrEmpty)
                 {
-                    handlerToGenerate.ServiceRegistration(sb);
+                    foreach (var handler in handlers)
+                    {
+                        handler.ServiceRegistration(sb);
+                    }
+                    sb.Line();
                 }
                 sb.Line("return services;");
             }

@@ -33,6 +33,7 @@ public abstract class TestBase
         [
             "System",
             "System.Collections.Generic",
+            "System.Linq",
             "System.Runtime.CompilerServices",
             "System.Threading",
             "System.Threading.Tasks",
@@ -61,7 +62,12 @@ public abstract class TestBase
         /// <summary>
         /// Whether to ignore compilation errors or not.
         /// </summary>
-        public bool IgnoreErrors { get; set; }
+        public bool IgnoreCompilationErrors { get; set; }
+
+        /// <summary>
+        /// Whether to ignore generator compilation errors or not.
+        /// </summary>
+        public bool IgnoreGeneratorErrors { get; set; }
 
         /// <summary>
         /// References to include in the compilation.
@@ -132,6 +138,8 @@ public abstract class TestBase
             options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
         );
 
+        AssertNoErrors(compilation.GetDiagnostics(), context.IgnoreCompilationErrors);
+
         var generator = new PipelinesGenerator().AsSourceGenerator();
         var driver = (GeneratorDriver)CSharpGeneratorDriver.Create([generator], driverOptions: new(default, true));
         driver = driver.RunGenerators(compilation);
@@ -139,8 +147,8 @@ public abstract class TestBase
         var runResult1 = driver.GetRunResult();
         var runResult2 = driver.RunGenerators(compilation.Clone()).GetRunResult();
 
-        AssertNoErrors(runResult1.Diagnostics, context.IgnoreErrors);
-        AssertNoErrors(runResult2.Diagnostics, context.IgnoreErrors);
+        AssertNoErrors(runResult1.Diagnostics, context.IgnoreGeneratorErrors);
+        AssertNoErrors(runResult2.Diagnostics, context.IgnoreGeneratorErrors);
         //AssertRunsEqual(runResult1, runResult2, trackingNames);
 
         await Verifier

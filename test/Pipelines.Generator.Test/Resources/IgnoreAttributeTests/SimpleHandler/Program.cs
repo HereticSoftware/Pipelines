@@ -1,8 +1,10 @@
-﻿public sealed record Ping(Guid Id) : IRequest<Ping, Pong>;
+namespace Simple;
+
+public sealed record Ping(Guid Id);
 
 public sealed record Pong(Guid Id);
 
-public sealed class PingHandler : IRequestHandler<Ping, Pong>
+public class PingHandler : IRequestHandler<Ping, Pong>
 {
     public ValueTask<Pong> Handle(Ping request, CancellationToken cancellationToken)
     {
@@ -10,7 +12,8 @@ public sealed class PingHandler : IRequestHandler<Ping, Pong>
     }
 }
 
-public sealed class DuplicatePingHandler : IRequestHandler<Ping, Pong>
+[Ignore]
+public class PingHandlerIgnore : IRequestHandler<Ping, Pong>
 {
     public ValueTask<Pong> Handle(Ping request, CancellationToken cancellationToken)
     {
@@ -18,7 +21,7 @@ public sealed class DuplicatePingHandler : IRequestHandler<Ping, Pong>
     }
 }
 
-public sealed class PingStreamHandler : IStreamRequestHandler<Ping, Pong>
+public class PingStream : IStreamRequestHandler<Ping, Pong>
 {
     public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
     {
@@ -26,7 +29,8 @@ public sealed class PingStreamHandler : IStreamRequestHandler<Ping, Pong>
     }
 }
 
-public sealed class DuplicateStreamPingHandler : IStreamRequestHandler<Ping, Pong>
+[Ignore]
+public class PingStreamIgnore : IStreamRequestHandler<Ping, Pong>
 {
     public async IAsyncEnumerable<Pong> Handle(Ping request, CancellationToken cancellationToken)
     {
