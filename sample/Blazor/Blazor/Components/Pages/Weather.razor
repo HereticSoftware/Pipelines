@@ -44,7 +44,7 @@ else
     {
         forecasts ??= [];
 
-        await foreach (var forecast in pipeline.Stream.Execute(new GetWeatherForecasts(5)))
+        await foreach (var forecast in pipeline.Stream(new GetWeatherForecasts(5)))
         {
             forecasts = forecasts.Value.Add(forecast);
             this.StateHasChanged();

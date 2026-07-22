@@ -1,15 +1,12 @@
+#!
 #:sdk Cake.Sdk
-#:property ManagePackageVersionsCentrally=false
-#:package Cake.GitVersioning@3.9.50
-#:package NuGet.Protocol@7.3.1
 
 var target = Argument<string>("target");
 var nugetApiKey = EnvironmentVariable("NUGET_API_KEY", string.Empty);
 var nugetSource = EnvironmentVariable("NUGET_SOURCE", string.Empty);
 
 var configuration = "Release";
-var version = GitVersioningGetVersion();
-Information("Version: {0}, Configuration: {1}", version.SemVer2, configuration);
+var version = ThisAssembly.Info.InformationalVersion;
 
 DirectoryPath[] srcProjects = [
     "src/Pipelines",
@@ -22,6 +19,8 @@ DirectoryPath[] projects = [
     .. srcProjects,
     .. testProjects
 ];
+
+Information("Pipelines Version {0} Configuration {1}", version, configuration);
 
 var restore = Task("Restore")
     .DoesForEach(projects, dir =>
@@ -83,8 +82,8 @@ var pullRequest = Task("Pull-Request")
     .IsDependentOn(testNuget);
 
 var publish = Task("Publish")
-    .WithCriteria(!string.IsNullOrEmpty(nugetSource), "Environment variable `NUGET_API_KEY` was not provided")
-    .WithCriteria(!string.IsNullOrEmpty(nugetApiKey), "Environment variable `NUGET_SOURCE` was not provided")
+    .WithCriteria(() => !string.IsNullOrEmpty(nugetSource), "Environment variable `NUGET_API_KEY` was not provided")
+    .WithCriteria(() => !string.IsNullOrEmpty(nugetApiKey), "Environment variable `NUGET_SOURCE` was not provided")
     .IsDependentOn(build)
     .IsDependentOn(test)
     .IsDependentOn(testNuget)
@@ -96,4 +95,14 @@ var publish = Task("Publish")
         DotNetNuGetPush("packages/*.nupkg", new() { Source = nugetSource, ApiKey = nugetApiKey });
     });
 
-RunTarget(target);
+try
+{
+    RunTarget(target);
+}
+catch (Exception ex)
+{
+    if (((int)Context.Log.Verbosity) > 2)
+        AnsiConsole.WriteException(ex);
+    else
+        Error(ex.Message);
+}

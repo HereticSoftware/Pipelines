@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app
-    .MapGet("/weatherforecast", (Pipeline pipeline, CancellationToken ct) => pipeline.Request.Execute(new GetWeatherForecasts(), ct))
+    .MapGet("/weatherforecast", (Pipeline pipeline, CancellationToken ct) => pipeline.Request(new GetWeatherForecasts(), ct))
     .WithName("Get Weather Forecast")
     .WithDescription("Uses the Pipeline (mediator) type to send a request, since the request implements the IRequest interface the method only needs a new Instance of the request type.");
 

@@ -1,4 +1,6 @@
 name: Pull Request
+permissions:
+  contents: read
 on:
   pull_request:
     branches:
@@ -9,11 +11,13 @@ on:
       - Directory.Packages.props
     types:
       - opened
+      - synchronize
       - ready_for_review
       - review_requested
 jobs:
   pull_request:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     steps:
       - name: Checkout
         uses: Actions/Checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
