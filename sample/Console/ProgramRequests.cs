@@ -31,7 +31,7 @@ public static class ProgramRequests
 
         var id = 10;
         var request = new Ping(id);
-        var response = await pipeline.Request.Execute(request, ct);
+        var response = await pipeline.Request(request, ct);
 
         Console.WriteLine($"""
             -----------------------------------

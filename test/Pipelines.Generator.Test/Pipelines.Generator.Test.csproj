@@ -10,7 +10,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="TUnit" />
     <PackageReference Include="Verify.TUnit" />
     <PackageReference Include="Verify.SourceGenerators" />
   </ItemGroup>

@@ -33,7 +33,7 @@ public static class ProgramStreams
 
         var id = 20;
         var request = new Ping(id);
-        await foreach (var response in pipeline.Stream.Execute(request, ct))
+        await foreach (var response in pipeline.Stream(request, ct))
         {
             Console.WriteLine($"""
                 -----------------------------------

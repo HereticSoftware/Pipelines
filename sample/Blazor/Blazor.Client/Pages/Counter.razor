@@ -17,6 +17,6 @@
 
     private async Task IncrementCount()
     {
-        current = await pipeline.Request.Execute(new IncrementCounterRequest(current.Count));
+        current = await pipeline.Request(new IncrementCounterRequest(current.Count));
     }
 }

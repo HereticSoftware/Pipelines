@@ -10,6 +10,8 @@
     <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
     <NoWarn>$(NoWarn);CS8509;IDE0039;IDE0130;IDE0290;IDE0060;RZ10012;IDE0052;BL0007;NU5128;IDE0079;CS8424;IDE0305</NoWarn>
     <WarningsAsErrors>$(WarningsAsErrors);RZ2012</WarningsAsErrors>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <MinVerDefaultPreReleaseIdentifiers>dev</MinVerDefaultPreReleaseIdentifiers>
   </PropertyGroup>
 
   <!-- Artifacts -->
@@ -19,18 +21,14 @@
     <UseArtifactsOutput>true</UseArtifactsOutput>
   </PropertyGroup>
 
-  <!-- Versioning -->
-  <PropertyGroup>
-    <NBGV_EmitThisAssemblyClass>true</NBGV_EmitThisAssemblyClass>
-    <GitVersionBaseDirectory>$(MSBuildThisFileDirectory)</GitVersionBaseDirectory>
-  </PropertyGroup>
-
   <!-- Repository -->
   <PropertyGroup>
     <Authors>Heretic Software</Authors>
-    <Copyright>Copyright (c) $([System.DateTimeOffset]::UtcNow.ToString("yyyy")) $(Authors)</Copyright>
+    <Year>2026</Year>
+    <Copyright>Copyright (c) $(Year) $(Authors)</Copyright>
     <OrganizationUrl>https://www.github.com/HereticSoftware</OrganizationUrl>
-    <RepositoryUrl>$(OrganizationUrl)/Pipelines</RepositoryUrl>
+    <RepositoryName>Pipelines</RepositoryName>
+    <RepositoryUrl>$(OrganizationUrl)/$(RepositoryName)</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryLicense>MIT</RepositoryLicense>
     <RepositoryDescription></RepositoryDescription>
@@ -59,5 +57,4 @@
     <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="True" PackagePath="\" Visible="False" />
     <!--<None Include="$(MSBuildThisFileDirectory)\Icon.png" Pack="True" PackagePath="\" Visible="False" />-->
   </ItemGroup>
-
 </Project>

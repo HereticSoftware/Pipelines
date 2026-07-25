@@ -6,7 +6,6 @@
     <IncludeSymbols>false</IncludeSymbols>
     <IsRoslynComponent>true</IsRoslynComponent>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <NBGV_EmitThisAssemblyClass>true</NBGV_EmitThisAssemblyClass>
   </PropertyGroup>
 
   <!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
