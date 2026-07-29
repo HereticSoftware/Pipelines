@@ -92,7 +92,7 @@ var publish = Task("Publish")
     .Does(() =>
     {
         Information("NuGet Push");
-        DotNetNuGetPush("packages/*.nupkg", new() { Source = nugetSource, ApiKey = nugetApiKey });
+        DotNetNuGetPush("packages/*.nupkg", new() { Source = nugetSource, ApiKey = nugetApiKey, SkipDuplicate = true });
     });
 
 try
