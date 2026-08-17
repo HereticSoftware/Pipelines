@@ -17,6 +17,12 @@ public sealed class HandlersRegistrationTests : TestBase
     }
 
     [Test]
+    public Task AbstractResult()
+    {
+        return Verify(configure);
+    }
+
+    [Test]
     public Task DeepNamespace()
     {
         return Verify(configure);

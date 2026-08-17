@@ -70,7 +70,6 @@ internal static class HandlesrRegistrationGenerator
             // todo: expand failure criteria and add diagnostics
             INamedTypeSymbol named => named is
             {
-                IsAbstract: false,
                 IsFileLocal: false,
                 DeclaredAccessibility: Accessibility.Public or Accessibility.Internal,
             },
